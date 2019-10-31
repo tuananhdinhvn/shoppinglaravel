@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-    <link rel="shortcut icon" href="//theme.hstatic.net/1000271724/1000376256/14/favicon.png?v=88" type="image/png" />
+    <link rel="shortcut icon" href="{{ asset('public/upload/template/'. $getindex->homepage_favicon) }}" type="image/png" />
     <meta charset="utf-8" />
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
     <title>
@@ -34,14 +34,14 @@
     </script> --}}
 
   
-    <script async src='//hstatic.net/0/0/global/haravan-analytics.min.js?v=6' type='text/javascript'></script>
+    <script async src='{{ asset('js/haravan-analytics.min.js') }}' type='text/javascript'></script>
 
-    <script src='//theme.hstatic.net/1000271724/1000376256/14/jquery.min.js?v=88' type='text/javascript'></script>
+    <script src='{{ asset('js/jquery.min.js') }}' type='text/javascript'></script>
 
     <!--------------CSS----------->
 
-    <link href='//theme.hstatic.net/1000271724/1000376256/14/plugins.css?v=88' rel='stylesheet' type='text/css' media='all' />
-    <link href='//theme.hstatic.net/1000271724/1000376256/14/styles.css?v=88' rel='stylesheet' type='text/css' media='all' />
+    <link href='{{ asset('css/plugins.css') }}' rel='stylesheet' type='text/css' media='all' />
+    <link href='{{ asset('css/styles.css') }}' rel='stylesheet' type='text/css' media='all' />
 
     @yield('css')
 
@@ -74,6 +74,19 @@
 
         @yield('main')
         
+
+        <!-- Modal HTML embedded directly into document -->
+        <div id="annount-order" class="modal" >
+            <h2>Hoàn tất đơn hàng</h2><br>
+            <p>Cám ơn bạn đã tin tưởng và đặt hàng.</p>
+            <p>Vui lòng giữ điện thoại để chúng tôi có thể liên hệ giao hàng trong thời gian sớm nhất.</p>
+            {{-- <a href="#" rel="modal:close">Đóng</a> --}}
+        </div>
+        
+        <!-- Link to open the modal -->
+        {{-- <p><a href="#annount-order" rel="modal:open">Open Modal</a></p> --}}
+
+        
         <!--Footer-->
         @include('frontend.layout.footer')
 
@@ -90,8 +103,8 @@
 
     @yield('script_product_detail')
 
-    <script src='//theme.hstatic.net/1000271724/1000376256/14/plugins.js?v=88' type='text/javascript'></script>
-    <script src='//theme.hstatic.net/1000271724/1000376256/14/inspired.js?v=88' type='text/javascript'></script>
+    <script src='{{ asset('js/plugins.js') }}' type='text/javascript'></script>
+    <script src='{{ asset('js/inspired.js') }}' type='text/javascript'></script>
     <div id="fb-root"></div>
     <script>
         (function(d, s, id) {
@@ -103,6 +116,21 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+
+        
+    <!-- jQuery Modal -->
+    <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/jquery.modal.min.css') }}" />
+
+    @if (Session::has('success_payment'))
+        <script>
+            $(document).ready(function(){
+                $("#annount-order").modal();
+            }); 
+        </script>
+    @endif
+    
+
 
     {{ $setting_info[0]->st_codefoot }}
 </body>

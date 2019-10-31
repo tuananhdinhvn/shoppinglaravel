@@ -50,11 +50,10 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'locale' => \App\Http\Middleware\Locale::class,
         'CheckLogin' => \App\Http\Middleware\CheckLogin::class,
         'CheckLogout' => \App\Http\Middleware\CheckLogout::class,
-
         'AssetAccount' => \App\Http\Middleware\AssetAccount::class,
-
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,

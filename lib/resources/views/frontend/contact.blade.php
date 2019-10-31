@@ -9,6 +9,13 @@
 
 
 @section('main')
+
+<style>
+    .alert-confirm-contact{
+        right:15px;
+    }
+</style>
+
     <div class="insMain">
         <section id="insContactPage">
 
@@ -25,6 +32,11 @@
             </div>
             <div class="container">
                 <div class="wrapperContactPage">
+                    
+                    @if (Session::has('sent_mail'))
+                        <p class="pull-left alert alert-success alert-confirm-contact">{!! Session::get('sent_mail') !!}</p>
+                    @endif
+                    
                     <div class="headingPage">
                         <h1 class="title">Liên hệ</h1>
                     </div>
@@ -35,41 +47,47 @@
 
                     <div class="contactList">
                         <div class="row">
-                            <div class="col-md-8 col-sm-12 col-xs-12 pull-left infoForm">
+                                
+                            <div class="col-md-8 col-sm-12 col-xs-12 pull-left infoForm" style="">
+                                
                                 <div class="wrapForm">
                                     <h3 class="name-head">
                                         <span>Bạn cần hỗ trợ? Hãy gửi thông tin cho chúng tôi</span>
                                     </h3>
-                                    <form accept-charset='UTF-8' action='/contact' class='contact-form' method='post'>
-                                        <input name='form_type' type='hidden' value='contact'>
-                                        <input name='utf8' type='hidden' value='✓'>
+                                   
+                                    <form action='{{ asset('contact/send-mail') }}' class='contact-form' method='get'>
 
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <span class="ico"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
-                                                    <input required type="text" id="contactFormName" class="form-control input-lg" name="contact[name]" placeholder="Tên của bạn" autocapitalize="words" value="">
+                                                    <input required type="text" id="contactFormName" class="form-control input-lg" name="contact_name" placeholder="Tên của bạn" value="">
                                                 </div>
                                                 <div class="form-group">
                                                     <span class="ico"><i class="fa fa-phone" aria-hidden="true"></i></span>
-                                                    <input required type="text" id="contactFormPhone" class="form-control input-lg" name="contact[phone]" placeholder="Tên của bạn" autocapitalize="words" value="">
+                                                    <input required type="text" id="contactFormPhone" class="form-control input-lg" name="contact_phone" placeholder="Số điện thoại" value="">
                                                 </div>
                                                 <div class="form-group">
                                                     <span class="ico"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                                    <input required type="email" name="contact[email]" placeholder="Email của bạn" id="contactFormEmail" class="form-control input-lg" autocorrect="off" autocapitalize="off" value="">
+                                                    <input required type="email" name="contact_email" placeholder="Email của bạn" id="contactFormEmail" class="form-control input-lg" value="">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label for="contactFormMessage" class="sr-only">Nội dung</label>
-                                                    <textarea required rows="6" name="contact[body]" class="form-control" placeholder="Viết bình luận" id="contactFormMessage"></textarea>
+                                                    <textarea required rows="6" name="contact_content" class="form-control" placeholder="Nội dung liên hệ" id="contactFormMessage"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-xs-12">
                                                 <button type="submit" class="btn btn-outline insButton">Gửi thông tin</button>
                                             </div>
+
                                         </div>
+
+                                        {{ csrf_field() }}
                                     </form>
+                                    
+                                            
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 pull-right infoText">

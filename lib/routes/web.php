@@ -14,8 +14,11 @@ Route::get('welcome', function () {
     return view('react');
 });
 
-Route::group(['namespace' => 'FrontEnd'], function () {
+Route::group(['namespace' => 'FrontEnd', 'middleware' => 'locale'], function () {
     Route::get('/', 'IndexController@getIndex');
+
+    // Ngôn ngữ
+    Route::get('change-language/{language}', 'IndexController@changeLanguage')->name('user.change-language');
 
     // Giỏ hàng
     Route::group(['prefix' => 'cart'], function () {
@@ -26,6 +29,8 @@ Route::group(['namespace' => 'FrontEnd'], function () {
         Route::get('show', 'CartController@showCart');
 
         Route::get('checkcart', 'CartController@checkCart');
+
+        Route::get('update', 'CartController@updateCart');
 
     });
 
@@ -83,6 +88,8 @@ Route::group(['namespace' => 'FrontEnd'], function () {
     // Trang liên hệ
     Route::group(['prefix' => 'contact'], function () {
         Route::get('/', 'ContactController@getContact');
+
+        Route::get('send-mail', 'ContactController@sendMail');
     });
 });
 

@@ -1,30 +1,5 @@
 <footer id="insFooterPage" class="footerTemp">
 
-        {{-- <section id="footerTop">
-            <div class="container">
-                <div class="groupNewletter text-center">
-                    <div class="newletterTitle">
-                        <h2>
-                            Đăng ký nhận bản tin
-                        </h2>
-                        <p>
-                            Chúng tôi cam kết sẽ không gửi những mail với nội dung không quan trọng hoặc spam
-                        </p>
-                    </div>
-                    <div class="newletterForm">
-                        <div class="customerForm">
-                            <form accept-charset='UTF-8' action='/account/contact' class='contact-form' method='post'>
-                                <input name='form_type' type='hidden' value='customer'>
-                                <input name='utf8' type='hidden' value='✓'>
-                                <input name="contact[email]" type="email" placeholder="Nhập email của bạn..." required="required" class="newsletter-input form-control" >
-                                <input type="submit" class="button_mini btn" value="Đăng ký">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </section> --}}
     
         <section id="footerMidle">
             <div class="container">

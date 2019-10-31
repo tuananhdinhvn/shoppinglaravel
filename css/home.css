@@ -49,13 +49,11 @@
 	height: 100%;
 }
 .engo-popup .content {
-	//max-width: 800px;
 	padding: 20px;
 	margin: 0 auto;
 	text-align: left;
 	position: relative;
 	background: #fff;
-	//min-width: 490px;
 	-webkit-transition: all 300ms ease-in-out;
 	-moz-transition: all 300ms ease-in-out;
 	-ms-transition: all 300ms ease-in-out;
@@ -265,7 +263,7 @@
 	margin-top: -100px;
 	margin-bottom: 30px;
 	position: relative;
-	z-index: 2;
+	z-index: 1;
 	background: rgba(255,255,255,.5);
 	padding: 15px;
 	border-radius: 5px;
@@ -406,7 +404,6 @@
 #insCountdown .countdownDetail {
 	max-width: 450px;
 	text-align: center;
-	//margin: 0 auto;
 	margin-top: 50px;
 }
 #insCountdown .countdownDetail p {

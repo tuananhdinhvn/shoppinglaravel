@@ -42,4 +42,8 @@ class CartController extends Controller
         $data['cart_get_total'] = Cart::subtotal(0,3);
         return view('frontend.showcart', $data);
     }
+
+    public function updateCart(Request $request){
+        Cart::update($request->rowId, $request->qty);
+    }
 }

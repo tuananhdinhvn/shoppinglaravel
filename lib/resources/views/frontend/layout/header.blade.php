@@ -1,3 +1,34 @@
+<style>
+    .lang-item li{
+        margin-right:10px;
+        float:left;
+        padding: 5px;
+        border: 1px solid #cecece;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        text-align: center;
+    }
+
+    .lang-item-mobile li{
+        margin-right: 10px;
+        float: right;
+        padding: 0px;
+        border: 1px solid #cecece;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        text-align: center;
+        
+    }
+
+    .lang-item-mobile li a{
+        border-bottom: none !important;
+        color: #fff;
+    }
+    
+</style>
+
 <header id="insHeaderPage" class="headerTemp">
     <div id="headerPage">
         <div class="container">
@@ -18,6 +49,8 @@
                             Beauty farm
                         </h1>
 
+                        
+
                         <div class="visible-xs visible-sm mbCart translateY-50">
                             <a href="{{ asset('cart/show') }}">
                                 <div class="icon">
@@ -27,27 +60,76 @@
                             </a>
                         </div>
                     </div>
-                    <div id="headerNav" class="col-lg-8 col-md-7 col-sm-12 col-xs-12 navSiteMain">
-                        <div class="loginMB visible-xs visible-sm">
-                            <div class="wrapLogin clearfix">
-                                <div class="icon">
-                                    <img src="//theme.hstatic.net/1000271724/1000376256/14/icon_avatar.png?v=88" alt=" ">
-                                </div>
-                                <div class="user">
+                    <div id="headerNav" class="col-lg-7 col-md-6 col-sm-12 col-xs-12 navSiteMain">
 
-                                    <a class="log-only" href="/account/login" title="Đăng nhập">Đăng nhập</a>
-                                    <h3>
-                                        Thông tin tài khoản
-                                    </h3>
+                       
+                        
+                        @if (Auth::check())
+
+                            <div class="loginMB visible-xs visible-sm">
+                                <div class="wrapLogin clearfix">
+                                    <div class="icon">
+                                        <a href="{{ asset('account') }}"><img src="{{ asset('public/upload/info/'.Auth::user()->avatar) }}" alt=" "></a>
+                                    </div>
+                                    
+
+                                    <div>
+                                        <ul class="lang-item-mobile">
+                                            <li>
+                                                <p><a href="{!! route('user.change-language', ['vi']) !!}">VI</a></p>
+                                            </li>
+                                            <li>
+                                                <p><a href="{!! route('user.change-language', ['en']) !!}">EN</a></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="user">
+                                        <h3>
+                                            <a class="log-only" href="{{ asset('logout') }}" title="Đăng nhập">Đăng xuất</a>
+                                        </h3>
+                                    </div>
+
 
                                 </div>
                             </div>
-                        </div>
+
+                        @else
+
+                            <div class="loginMB visible-xs visible-sm">
+                                <div class="wrapLogin clearfix">
+                                    <div class="icon">
+                                        <a href="{{ asset('account') }}"><img src="{{ asset('public/upload/info/avatar.png') }}" alt=" "></a>
+                                    </div>
+                                    
+
+                                    <div>
+                                        <ul class="lang-item-mobile">
+                                            <li>
+                                                <p><a href="{!! route('user.change-language', ['vi']) !!}">VI</a></p>
+                                            </li>
+                                            <li>
+                                                <p><a href="{!! route('user.change-language', ['en']) !!}">EN</a></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                   
+                                    <div class="user">    
+                                        <h3>
+                                            <a class="log-only" href="{{ asset('login') }}" title="Đăng nhập">Đăng nhập</a>
+                                        </h3>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                        @endif
+
                         <ul id="navMenu" class="nav-navbar notStyle clearfix text-center">
 
                             <li class=" active">
                                 <a href="{{ asset('/') }}" class=" current" title="Trang chủ">
-                                    <span>Trang chủ</span>
+                                    <span>@lang('messages.home')</span>
                                 </a>
                             </li>
 
@@ -59,33 +141,27 @@
 
                             <li class="liChild ">
                                 <a href="{{ asset('product') }}" title="Sản phẩm" class="">
-                                    <span>Sản phẩm</span> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    <span>@lang('messages.product')</span> <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
                                 <ul class="mainChild levlup_2" role="menu">
-
                                     @foreach ($productcategory_list as $item)
                                     <li class="">
                                         <a href="{{ asset('productcat/'.$item->procat_slug.'/'.$item->procat_id) }}" title="{{ $item->procat_ten }}"><span>{{ $item->procat_ten }}</span></a>
                                     </li>
                                     @endforeach
-
-                                    
                                 </ul>
                             </li>
 
                             <li class="liChild ">
                                 <a href="{{ asset('blog') }}" title="Sản phẩm" class="">
-                                    <span>Bài viết</span> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    <span>@lang('messages.blog')</span> <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
                                 <ul class="mainChild levlup_2" role="menu">
-
                                     @foreach ($blogcategory_list as $item)
                                     <li class="">
                                         <a href="{{ asset('blogcat/'.$item->blogcat_slug.'/'.$item->blogcat_id) }}" title="{{ $item->blogcat_ten }}"><span>{{ $item->blogcat_ten }}</span></a>
                                     </li>
                                     @endforeach
-
-                                    
                                 </ul>
                             </li>
                             
@@ -94,17 +170,39 @@
 
                             <li class="">
                                 <a href="{{ asset('contact') }}" class="" title="Liên hệ">
-                                    <span>Liên hệ</span>
+                                    <span>@lang('messages.contact')</span>
                                 </a>
                             </li>
 
                         </ul>
+
+                        
+
+                        
                         <div class="visible-xs visible-sm closeMenuMB text-center">
                             <a href="javascript:void(0)" class="closeNav viewAll">Đóng</a>
                         </div>
+
+
+                        
+
+                        
                     </div>
-                    <div id="headerUser" class="col-lg-2 col-md-2 hidden-sm hidden-xs">
+                    <div id="headerUser" class="col-lg-3 col-md-3 hidden-sm hidden-xs">
                         <div class="wrap cleafix text-right">
+
+                            <div>
+                                <ul class="lang-item">
+                                    <li>
+                                        <p><a href="{!! route('user.change-language', ['vi']) !!}">VI</a></p>
+                                    </li>
+                                    <li>
+                                        <p><a href="{!! route('user.change-language', ['en']) !!}">EN</a></p>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            
                             <div class="userBox itemUse relative">
                                 <a href="{{ asset('account') }}">
                                     <div class="box">
@@ -117,15 +215,15 @@
                                 @if (Auth::check())
                                     <div id="userListDetail" class="popupLogin success">
                                         <ul class="notStyle list text-left">
-                                            <li><a href="{{ asset('account') }}" title="Đăng ký"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a></li>
-                                            <li><a href="{{ asset('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a></li>
+                                            <li><a href="{{ asset('account') }}" title="Đăng ký"><i class="fa fa-user" aria-hidden="true"></i> @lang('messages.account')</a></li>
+                                            <li><a href="{{ asset('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> @lang('messages.logout')</a></li>
                                         </ul>
                                     </div>
                                 @else
                                     <div id="userListDetail" class="popupLogin success">
                                         <ul class="notStyle list text-left">
-                                            <li><a href="{{ asset('register') }}" title="Đăng ký"><i class="fa fa-registered" aria-hidden="true"></i> Đăng ký</a></li>
-                                            <li><a href="{{ asset('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập</a></li>
+                                            <li><a href="{{ asset('register') }}" title="Đăng ký"><i class="fa fa-registered" aria-hidden="true"></i> @lang('messages.register')</a></li>
+                                            <li><a href="{{ asset('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> @lang('messages.login')</a></li>
                                         </ul>
                                     </div>
                                 @endif
@@ -145,9 +243,9 @@
                                 <div class="frmSearch popupLogin">
                                     <form id="searchFRM" action="{{ asset('/search') }}" method="get">
                                         <i class="glyphicon glyphicon-search"></i>
-                                        <input required autocomplete="off" type="text" name="keyword" id="inputSearchAuto" placeholder="Từ khóa tìm kiếm..." />
+                                        <input required autocomplete="off" type="text" name="keyword" id="inputSearchAuto" placeholder="" />
                                         <button type="submit" class="insButton btnSearch">
-                                            Tìm kiếm
+                                            @lang('messages.search')
                                         </button>
                                         {{ csrf_field() }}
                                     </form>

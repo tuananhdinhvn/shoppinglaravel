@@ -8,7 +8,17 @@
 @endsection
 
 @section('main')
-        
+<script type="text/javascript">
+    function updateCart(qty, rowId){
+        $.get(
+            '{{ asset('cart/update') }}',
+            { qty:qty, rowId:rowId },
+            function(){
+                location.reload();
+            }
+        );
+    }
+</script>        
 
 @if ($cart_count==0)
     <div class="insMain">
@@ -20,7 +30,7 @@
 
                         <div class="page-content not-item text-center">
                             <div class="img text-center">
-                                <img src="//theme.hstatic.net/1000271724/1000376256/14/empty_cart.png?v=88" alt="Không có sản phẩm nào trong giỏ hàng của bạn" />
+                                <img src="{{ asset('public/upload/info/empty_cart.png') }}" alt="Không có sản phẩm nào trong giỏ hàng của bạn" />
                             </div>
                             <p>
                                 Không có sản phẩm nào trong giỏ hàng của bạn
@@ -46,6 +56,7 @@
                         <div class="page-content">
                             <div class="row">
                                 <div class="boxCart leftCart col-md-8 col-sm-12 col-xs-12 ">
+
                                     <div class="cart_header_labels hidden-xs clearfix">
                                         <div class="label_item col-xs-12 col-sm-2 col-md-2">
                                             <div class="cart_product first_item">
@@ -78,8 +89,8 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="ajax_content_cart">
-    
                                         @foreach ($cart_items as $item)
                                             <div class="list_product_cart clearfix itemCart" data-id="1025198797">
                                                 <div class="cpro_item image col-xs-3 col-sm-2 col-md-2">
@@ -106,7 +117,7 @@
                                                 <div class="cpro_item qty text-center col-xs-6 col-sm-2 col-md-2">
                                                     <div class="cpro_item_inner">
                                                         <div class="ajaxcart__qty">
-                                                            <input type="number" class="ajaxcart__qty-num" min="1" value="{{ $item->qty }}" min="0" aria-label="quantity" pattern="[0-9]*">
+                                                            <input type="number" class="ajaxcart__qty-num" onchange="updateCart(this.value, '{{ $item->rowId }}')" min="1" value="{{ $item->qty }}" min="0" aria-label="quantity" pattern="[0-9]*">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -124,13 +135,11 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                       
-    
                                         
-                                        
-    
                                     </div>
                                 </div>
+
+
                                 <div class="boxCart rightCart col-md-4 col-sm-12 col-xs-12 ">
                                     <div class="list_button_cart clearfix">
                                         <div class="actionCart clearfix text-right">
@@ -186,6 +195,7 @@
         </section>
     </div>
 @endif
+
 
 
 @endsection

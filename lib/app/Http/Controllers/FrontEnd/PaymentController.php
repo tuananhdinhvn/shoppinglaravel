@@ -63,6 +63,6 @@ class PaymentController extends Controller
 
         Cart::destroy();
 
-        return redirect()->intended('/');
+        return redirect()->intended('/')->with('success_payment', 'Hoàn tất đơn hàng');
     }
 }

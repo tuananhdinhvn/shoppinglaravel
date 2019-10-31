@@ -17,4 +17,13 @@ class IndexController extends Controller
         
         return view('frontend.home', $data);
     }
+
+    public function changeLanguage($language)
+    {
+        \Session::put('website_language', $language);
+
+        return redirect()->back();
+    }
+
+
 }

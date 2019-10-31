@@ -4,7 +4,7 @@
 
 
 @section('css')
-<link href='//theme.hstatic.net/1000271724/1000376256/14/pages.css?v=88' rel='stylesheet' type='text/css'  media='all'  />
+<link href='{{ asset('css/pages.css') }}' rel='stylesheet' type='text/css' media='all' />
 @endsection
 
 @section('main')
