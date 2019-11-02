@@ -25,6 +25,7 @@
     </span>
 
     <script src='{{ asset('js/jquery.min.js') }}' type='text/javascript'></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
 
     <!--------------CSS----------->
 
@@ -37,6 +38,31 @@
             template: "product",
 
         };
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            
+            $("#button-test").click(function(){
+                $(this).css("color", "blue");
+            });
+            
+            function updateQty(){
+            // var QtyProduct = $("#pdQuantity").val();
+
+            //    $("#pdQuantity").attr("value", QtyProduct);
+
+            // $("#productTitle").css("color", "red");
+
+            // $("#link-update-qty").attr("href","{{ asset('cart/add/'.$productdetail_item->pro_id.'?qty=') }}");
+            
+           
+            
+            }
+            
+        
+            
+        });
     </script>
 
 </head>
@@ -115,10 +141,12 @@
 
                                             </div>
                                         </div>
+
+                                        <button id="button-test">click here</button>
                                         
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pdInfo">
                                             <div class="wrapPdInfo">
-                                                <h1 class="title pdTitle">
+                                                <h1 id="productTitle" class="title pdTitle">
                                                     {{ $productdetail_item->pro_ten }}
                                                 </h1>
 
@@ -181,11 +209,11 @@
                                                                     </div>
                                                                     <div class="groupQty">
                                                                         <button type="button" class="qtyControl minus">-</button>
-                                                                        <input type="number" maxlength="12" min="1" class="input-text qty" title="Số lượng" size="2" value="1" name="Lines" id="pdQuantity">
+                                                                        <input type="number" onchange="updateQty()" maxlength="12" min="1" class="input-text qty" title="Số lượng" size="2"  value="1" name="product_qty" id="pdQuantity">
                                                                         <button type="button" class="qtyControl plus">+</button>
                                                                     </div>
                                                                     <div class="listAction">
-                                                                        <a href="{{ asset('cart/add/'.$productdetail_item->pro_id) }}">
+                                                                        <a id="link-update-qty" href="{{ asset('cart/add/'.$productdetail_item->pro_id.'?qty=') }}">
                                                                             <button type="button" class="button btn-outline btn-addCart " onclick="success()">
                                                                                 Thêm vào giỏ
                                                                             </button>
@@ -373,6 +401,8 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+
+    
 </body>
 
 </html>

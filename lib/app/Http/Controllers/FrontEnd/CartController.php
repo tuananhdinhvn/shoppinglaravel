@@ -11,7 +11,7 @@ use App\model\ProductModel;
 
 class CartController extends Controller
 {
-    public function addCart($id){
+    public function addCart(Request $request, $id){
         $product = ProductModel::find($id);
         Cart::add([
             'id' => $id, 
